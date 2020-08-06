@@ -31,10 +31,22 @@ public class PessoaService {
 
     public void deletarTudo() {
         List<Pessoa> lista = pessoaRepository.findAll();
+
         for (Pessoa pessoa : lista) {
             pessoaRepository.delete(pessoa.getId());
         }
     }
+
+
+    public void deletarPessoaCpf(Long id, String cpf) {
+        pessoaRepository.deletePessoaByIdOrCpf(id, cpf);
+    }
+
+    public void deletarPessoaPorCpf(String string) {
+        pessoaRepository.deletePessoaByCpf(string);
+    }
+
+
 
 
 }
