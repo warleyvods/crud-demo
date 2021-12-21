@@ -10,7 +10,6 @@ spring:
 
   #JPA Hibernate
   jpa:
-    #database-platform: org.hibernate.dialect.PostgreSQL94Dialect
     show-sql: true
     hibernate:
       ddl-auto: create-drop
