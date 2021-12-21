@@ -2,7 +2,6 @@ package com.example.demo.api.service;
 
 import com.example.demo.api.entity.Pessoa;
 import com.example.demo.api.repository.PessoaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,43 +9,25 @@ import java.util.List;
 @Service
 public class PessoaService {
 
-    @Autowired
-    PessoaRepository pessoaRepository;
+    private final PessoaRepository pessoaRepository;
 
-    public List<Pessoa> listarPessoas() {
+    public PessoaService(PessoaRepository pessoaRepository) {
+        this.pessoaRepository = pessoaRepository;
+    }
+
+    public List<Pessoa> findAll() {
         return pessoaRepository.findAll();
     }
 
-    public Pessoa salvarPessoa(Pessoa pessoa) {
+    public Pessoa save(Pessoa pessoa) {
         return pessoaRepository.save(pessoa);
     }
 
-    public void deletarPessoaPorId(Long id) {
-        pessoaRepository.delete(id);
+    public void delete(Long id) {
+        pessoaRepository.deleteById(id);
     }
 
-    public Pessoa buscarPessoaPorId(Long id) {
-        return pessoaRepository.findOne(id);
+    public Pessoa findById(Long id) {
+        return pessoaRepository.findById(id).orElseThrow(() -> new NullPointerException("user not found!"));
     }
-
-    public void deletarTudo() {
-        List<Pessoa> lista = pessoaRepository.findAll();
-
-        for (Pessoa pessoa : lista) {
-            pessoaRepository.delete(pessoa.getId());
-        }
-    }
-
-
-    public void deletarPessoaCpf(Long id, String cpf) {
-        pessoaRepository.deletePessoaByIdOrCpf(id, cpf);
-    }
-
-    public void deletarPessoaPorCpf(String string) {
-        pessoaRepository.deletePessoaByCpf(string);
-    }
-
-
-
-
 }
