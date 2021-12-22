@@ -6,10 +6,12 @@ services:
     container_name: db
     hostname: db
     restart: always
+    networks:
+      - kaizen-net
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=warley
       - POSTGRES_PASSWORD=123456
       - POSTGRES_DB=dbs
     ulimits:
@@ -18,5 +20,5 @@ services:
         hard: 65536
 
 networks:
-  nx:
+  kaizen-net:
     driver: bridge
