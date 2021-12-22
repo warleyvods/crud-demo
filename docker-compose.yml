@@ -11,9 +11,12 @@ services:
     ports:
       - 5432:5432
     environment:
-      - POSTGRES_USER=warley
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=dbs
+      - POSTGRES_USER=kaizen
+      - POSTGRES_PASSWORD=KZ@db!123456789
+      - POSTGRES_DB=ksdb
+    volumes:
+      - './postgres/pg_db:/var/lib/postgresql'
+      - './postgres/pg_data:/var/lib/postgresql/data'
     ulimits:
       nofile:
         soft: 65536
